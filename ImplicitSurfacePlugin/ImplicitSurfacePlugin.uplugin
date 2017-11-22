@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "ImplicitSurfacePlugin",
+	"Description": "",
+	"Category": "Other",
+	"CreatedBy": "Noah Zuo",
+	"CreatedByURL": "http://blog.csdn.net/noahzuo/",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "ImplicitSurfacePlugin",
+			"Type": "Developer",
+			"LoadingPhase": "Default"
+		}
+	]
+}
