@@ -826,6 +826,9 @@ void UImplicitSurfaceMeshComponent::GenerateMesh()
 
 FPrimitiveSceneProxy* UImplicitSurfaceMeshComponent::CreateSceneProxy()
 {
+	if (TriangleVertices.Num() == 0)
+		return nullptr;
+
 	return new FImplicitSurfaceSceneProxy(this);
 }
 
