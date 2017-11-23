@@ -203,22 +203,29 @@ public:
 		// Process Triangles
 		for (int i = 0; i < newData->indices.Num(); i++)
 		{
-			OutIndices.Add(newData->indices[i].X);
-			OutIndices.Add(newData->indices[i].Y);
 			OutIndices.Add(newData->indices[i].Z);
+			OutIndices.Add(newData->indices[i].Y);
+			OutIndices.Add(newData->indices[i].X);
 			// Process Normal
-			FVector u = (OutVertices[newData->indices[i].Y].Position -
-				OutVertices[newData->indices[i].X].Position).GetSafeNormal();
+			FVector Edge01 = (OutVertices[newData->indices[i].Y].Position -
+				OutVertices[newData->indices[i].X].Position);
 
-			FVector v = -FVector::CrossProduct(u, newData->normals[newData->indices[i].X]);
+			FVector Edge02 = (OutVertices[newData->indices[i].Z].Position -
+				OutVertices[newData->indices[i].X].Position);
+
+			const FVector TangentX = Edge01.GetSafeNormal();
+			const FVector TangentZ = (Edge02 ^ Edge01).GetSafeNormal();
+			const FVector TangentY = (TangentX ^ TangentZ).GetSafeNormal();
+
+
 			if (!normalSet[newData->indices[i].X])
-				OutVertices[newData->indices[i].X].SetTangents(u, v, newData->normals[newData->indices[i].X]);
+				OutVertices[newData->indices[i].X].SetTangents(TangentX, TangentY, TangentZ);
 
 			if (!normalSet[newData->indices[i].Y])
-				OutVertices[newData->indices[i].Y].SetTangents(u, v, newData->normals[newData->indices[i].X]);
+				OutVertices[newData->indices[i].Y].SetTangents(TangentX, TangentY, TangentZ);
 
 			if (!normalSet[newData->indices[i].Z])
-				OutVertices[newData->indices[i].Z].SetTangents(u, v, newData->normals[newData->indices[i].X]);
+				OutVertices[newData->indices[i].Z].SetTangents(TangentX, TangentY, TangentZ);
 
 		}
 
