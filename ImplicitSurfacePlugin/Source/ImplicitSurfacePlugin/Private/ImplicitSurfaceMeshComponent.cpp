@@ -894,7 +894,7 @@ FBoxSphereBounds UImplicitSurfaceMeshComponent::CalcBounds(const FTransform& Loc
 
 	for (int i = 0; i < TriangleVertices.Num(); i++)
 	{
-		result += TriangleVertices[i];
+		result += LocalToWorld.TransformPosition( TriangleVertices[i]);
 	}
 
 	return FBoxSphereBounds(result);
